@@ -13,8 +13,8 @@ int main(int argc, char* argv[]){
     cout<<"this is server!"<<endl;
 
     //socket
-    int socketSock = socket(AF_INET,SOCK_STREAM,IPPROTO_IP);
-    if (socketSock == -1) {
+    SOCKET s = socket(AF_INET,SOCK_STREAM,IPPROTO_IP);
+    if (s == -INVALID_SOCKET) {
         std::cout << "Error: socket" << std::endl;
         system("pause");
         return 0;
@@ -24,13 +24,13 @@ int main(int argc, char* argv[]){
     addr.sin_port = htons(8000);
     addr.sin_family = AF_INET;
     addr.sin_addr.S_un.S_addr = INADDR_ANY;
-    if(bind(socketSock,(struct sockaddr*)&addr,sizeof (addr))==SOCKET_ERROR){
+    if(bind(s,(struct sockaddr*)&addr,sizeof (addr))==SOCKET_ERROR){
         std::cout << "Error: bind" << std::endl;
         system("pause");
         return 0;
     }
     //listen
-    if(listen(socketSock,5)==SOCKET_ERROR){
+    if(listen(s,5)==SOCKET_ERROR){
         std::cout << "Error: listen" << std::endl;
         system("pause");
         return 0;
@@ -38,7 +38,7 @@ int main(int argc, char* argv[]){
     //accept
     struct sockaddr_in addrclient;
     int addrclientlen = sizeof(addrclient);
-    SOCKET sClient =accept(socketSock,(struct sockaddr*)&addrclient,&addrclientlen);
+    SOCKET sClient =accept(s,(struct sockaddr*)&addrclient,&addrclientlen);
     if(sClient== INVALID_SOCKET){
         std::cout<<"Error:accept"<<std::endl;
         system("pause");
@@ -52,7 +52,7 @@ int main(int argc, char* argv[]){
         int retval = recv(sClient,buf,BUF_SIZE,0);
         if(SOCKET_ERROR == retval){
             cout << "recv failed!" << endl;
-            closesocket(socketSock);
+            closesocket(s);
             closesocket(sClient);
             WSACleanup();
             system("pause");
@@ -68,7 +68,7 @@ int main(int argc, char* argv[]){
 
         send(sClient,sendbuf,strlen(sendbuf),0);
     }
-    closesocket(socketSock);
+    closesocket(s);
     closesocket(sClient);
     WSACleanup();
     system("pause");

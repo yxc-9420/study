@@ -20,6 +20,7 @@ SOURCES += \
         MultiThreading/multiThreading.cpp \
         STL/main.cpp \
         STL/my_vector.cpp \
+        STL/rbtree.cpp \
         STL/stl_algorithm.cpp \
         STL/tree.cpp \
         Socket/client.cpp \
@@ -39,6 +40,7 @@ HEADERS += \
     DesignMode/csimplefactory.h \
     MultiThreading/cthreadpool.h \
     STL/my_vector.h \
+    STL/rbtree.h \
     STL/tree.h \
     carraysort.h \
     cmysharedptr.h \

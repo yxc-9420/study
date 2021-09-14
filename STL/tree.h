@@ -5,9 +5,9 @@ using std::list;
 
 struct Node{
     int val;
-    Node* left;
-    Node* right;
-};
+    Node *left;
+    Node *right;
+}; 
 
 class Tree
 {

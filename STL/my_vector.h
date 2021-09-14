@@ -37,7 +37,7 @@ template<class T, class Alloc>
 void my_vector<T,Alloc>::push_back(const T &x)
 {
     if(finish != end_of_storage){
-        //Ê£ÓàÈİÁ¿³ä×ã
+        //å‰©ä½™å®¹é‡å……è¶³
         _Construct(finish,x);
         ++finish;
     }
@@ -52,13 +52,13 @@ void my_vector<T,Alloc>::insert_aux(iterator position,const T &x)
     if(finish != end_of_storage){
         _Construct(finish,*(finish-1));
         ++finish;
-        copy_backward(position,finish-2,finish-1);//´ÓºóÏòÇ°¿½±´ÔªËØ
+        copy_backward(position,finish-2,finish-1);//ä»åå‘å‰æ‹·è´å…ƒç´ 
         *position = x;
     }
     else{
         const size_type old_size = size();
         const size_type new_size = old_size==0?1:old_size*2;
-        //·ÖÅäÄÚ´æ
+        //åˆ†é…å†…å­˜
         __gnu_cxx::new_allocator<T> alloc;
 
         iterator new_start = alloc.allocate(new_size);
@@ -72,12 +72,12 @@ void my_vector<T,Alloc>::insert_aux(iterator position,const T &x)
             _Destroy(new_start,new_finish);
             alloc.deallocate(new_start,new_size);
         }
-        //Îö¹¹Ô­ vector¶ÔÏó
+        //ææ„åŸ vectorå¯¹è±¡
         _Destroy(begin(),end());
-        //ÊÍ·ÅÔ­ vectorÄÚ´æ
+        //é‡Šæ”¾åŸ vectorå†…å­˜
         alloc.deallocate(start,end_of_storage-start);
 
-        //µ÷Õûµü´úÆ÷
+        //è°ƒæ•´è¿­ä»£å™¨
         start = new_start;
         finish = new_finish;
         end_of_storage = start+new_size;

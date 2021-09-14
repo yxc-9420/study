@@ -4,7 +4,7 @@
 using namespace std;
 int main(int argc,char *argv[]){
     WSADATA wsd;
-    //typedef unsigned short  WORD ÎŞ·ûºÅ¶ÌÕûĞÎ 2¸ö×Ö½Ú
+    //typedef unsigned short  WORD æ— ç¬¦å·çŸ­æ•´å½¢ 2ä¸ªå­—èŠ‚
     if(WSAStartup(MAKEWORD(2,2),&wsd)!=0){
         cout<<"WSAStartup failed!"<<endl;
         return -1;
